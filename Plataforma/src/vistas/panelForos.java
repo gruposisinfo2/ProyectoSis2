@@ -4,29 +4,22 @@
  */
 
 /*
- * panelTrabajos.java
+ * panelForos.java
  *
- * Created on Apr 15, 2019, 2:21:45 AM
+ * Created on Apr 16, 2019, 1:11:07 PM
  */
 
 package vistas;
-
-import java.awt.BorderLayout;
-import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
  * @author alvaro
  */
-public class panelTrabajos extends javax.swing.JPanel {
+public class panelForos extends javax.swing.JPanel {
 
-    /** Creates new form panelTrabajos */
-    public panelTrabajos() {
+    /** Creates new form panelForos */
+    public panelForos() {
         initComponents();
-//        tblTrab.setOpaque(false);
-//       ((DefaultTableCellRenderer)tblTrab.getDefaultRenderer(Object.class)).setOpaque(false);
-//        jScrollPane1.setOpaque(false);
-//        jScrollPane1.getViewport().setOpaque(false);
     }
 
     /** This method is called from within the constructor to
@@ -48,7 +41,7 @@ public class panelTrabajos extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 872, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

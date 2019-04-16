@@ -11,24 +11,44 @@
 
 package vistas;
 
+import clases.conexion;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import clases.pintarPanel;
+import java.sql.Connection;
+import javax.swing.JPanel;
+
 
 /**
  *
  * @author alvaro
  */
 public class plataforma extends javax.swing.JFrame {
-pintarPanel pintor = new pintarPanel();
-panelPublicaciones panel = new panelPublicaciones();
+int posicion=-150;
+conexion cn = new conexion();
+Connection con = cn.conexionBD();
+panelPublicaciones pub = new panelPublicaciones();
+panelTrabajos tra = new panelTrabajos();
+panelUsuarios users = new panelUsuarios();
+panelForos foros = new panelForos();
     /** Creates new form plataforma */
     public plataforma() {
         initComponents();
         this.setLocationRelativeTo(null);
+        btnEdit.setText("<html><p>Modo</p><p>Edicion</p></html>");
 
        
     }
 
+    public void navegacion(JPanel menu, JPanel panel ){
+            panelMenu.setSize(800,520);
+            panelMenu.removeAll();
+            panelMenu.add(panel, BorderLayout.CENTER);
+            panel.setSize(800, 520);
+            panel.setLocation(0, 0);
+            panelMenu.revalidate();
+            panelMenu.repaint();
+         
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -40,19 +60,20 @@ panelPublicaciones panel = new panelPublicaciones();
 
         jPanel1 = new javax.swing.JPanel();
         panelNav = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
         lblnomb = new javax.swing.JLabel();
         lblPub = new javax.swing.JLabel();
         lblTrab = new javax.swing.JLabel();
         lblUsr = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblForo = new javax.swing.JLabel();
+        lblSalir = new javax.swing.JLabel();
         panelLateral = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         btnPerfil = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        panelMenu = new javax.swing.JPanel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,16 +85,17 @@ panelPublicaciones panel = new panelPublicaciones();
 
         panelNav.setBackground(new java.awt.Color(54, 54, 87));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Iconomenu2.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Iconomenu2.png"))); // NOI18N
+        btnMenu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnMenu.setBorderPainted(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMenuActionPerformed(evt);
             }
         });
 
-        lblnomb.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        lblnomb.setFont(new java.awt.Font("DejaVu Sans", 0, 18));
         lblnomb.setForeground(java.awt.Color.white);
         lblnomb.setText("UMSS");
 
@@ -92,21 +114,45 @@ panelPublicaciones panel = new panelPublicaciones();
         lblTrab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTrab.setText("Trabajos");
         lblTrab.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lblTrab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTrab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTrabMouseClicked(evt);
+            }
+        });
 
         lblUsr.setForeground(java.awt.Color.white);
         lblUsr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsr.setText("Usarios");
+        lblUsr.setText("Usuarios");
         lblUsr.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lblUsr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblUsr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUsrMouseClicked(evt);
+            }
+        });
 
-        jLabel5.setForeground(java.awt.Color.white);
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("jLabel5");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lblForo.setForeground(java.awt.Color.white);
+        lblForo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblForo.setText("Foros");
+        lblForo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lblForo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblForo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblForoMouseClicked(evt);
+            }
+        });
 
-        jLabel6.setForeground(java.awt.Color.white);
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("jLabel6");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lblSalir.setForeground(java.awt.Color.white);
+        lblSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSalir.setText("Salir");
+        lblSalir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lblSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSalirMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelNavLayout = new javax.swing.GroupLayout(panelNav);
         panelNav.setLayout(panelNavLayout);
@@ -114,7 +160,7 @@ panelPublicaciones panel = new panelPublicaciones();
             panelNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNavLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnMenu)
                 .addGap(24, 24, 24)
                 .addComponent(lblnomb, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94)
@@ -124,9 +170,9 @@ panelPublicaciones panel = new panelPublicaciones();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblForo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelNavLayout.setVerticalGroup(
@@ -137,15 +183,15 @@ panelPublicaciones panel = new panelPublicaciones();
                     .addComponent(lblPub, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTrab, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblForo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(panelNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addGroup(panelNavLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(lblnomb))
                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelNavLayout.createSequentialGroup()
                     .addGap(33, 33, 33)
-                    .addComponent(jButton1)))
+                    .addComponent(btnMenu)))
         );
 
         getContentPane().add(panelNav, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 80));
@@ -165,13 +211,30 @@ panelPublicaciones panel = new panelPublicaciones();
 
         btnEdit.setText("Modo Edicion");
         btnEdit.setBorderPainted(false);
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelLateral.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 100, 30));
 
         jSeparator1.setBackground(java.awt.Color.white);
         panelLateral.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 5));
         panelLateral.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 150, 5));
 
-        getContentPane().add(panelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 150, 520));
+        getContentPane().add(panelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 80, 150, 520));
+
+        panelMenu.setOpaque(false);
+        panelMenu.setLayout(new BorderLayout());
+
+        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
+        panelMenu.setLayout(panelMenuLayout);
+        panelMenuLayout.setHorizontalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        panelMenuLayout.setVerticalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 520, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 800, 520));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/FondoMenuDocente.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
@@ -179,18 +242,34 @@ panelPublicaciones panel = new panelPublicaciones();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int posicion = panelLateral.getX();
-        if(posicion == 0){
-            panelLateral.setLocation(-150, 80);
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        posicion = panelLateral.getX(); //obtiene la posicion x del panel lateral
+        if(posicion == 0){  //si el panel lateral esta abierto
+            panelLateral.setLocation(-150, 80);//Oculta el panel lateral
         }else{
-            panelLateral.setLocation(0, 80);
+            panelLateral.setLocation(0, 80);//Muestra el panel lateral     
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     private void lblPubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPubMouseClicked
-            pintor.pintaPanel(this, panel);
+        navegacion(panelMenu, pub);     //Pinta el panel de publicaciones
     }//GEN-LAST:event_lblPubMouseClicked
+
+    private void lblTrabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTrabMouseClicked
+        navegacion(panelMenu, tra);
+    }//GEN-LAST:event_lblTrabMouseClicked
+
+    private void lblSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lblSalirMouseClicked
+
+    private void lblForoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForoMouseClicked
+        navegacion(panelMenu, foros);
+    }//GEN-LAST:event_lblForoMouseClicked
+
+    private void lblUsrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsrMouseClicked
+        navegacion(panelMenu, users);
+    }//GEN-LAST:event_lblUsrMouseClicked
 
     /**
     * @param args the command line arguments
@@ -205,20 +284,21 @@ panelPublicaciones panel = new panelPublicaciones();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnPerfil;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblForo;
     private javax.swing.JLabel lblPub;
-    private javax.swing.JLabel lblTrab;
+    private javax.swing.JLabel lblSalir;
+    javax.swing.JLabel lblTrab;
     private javax.swing.JLabel lblUsr;
     private javax.swing.JLabel lblnomb;
     private javax.swing.JPanel panelLateral;
+    public static javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelNav;
     // End of variables declaration//GEN-END:variables
 

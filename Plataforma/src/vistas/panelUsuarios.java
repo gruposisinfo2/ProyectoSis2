@@ -11,6 +11,8 @@
 
 package vistas;
 
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author alvaro
@@ -20,6 +22,11 @@ public class panelUsuarios extends javax.swing.JPanel {
     /** Creates new form panelUsuarios */
     public panelUsuarios() {
         initComponents();
+        
+        tblUser.setOpaque(false);
+       ((DefaultTableCellRenderer)tblUser.getDefaultRenderer(Object.class)).setOpaque(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
     }
 
     /** This method is called from within the constructor to
@@ -31,20 +38,62 @@ public class panelUsuarios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUser = new javax.swing.JTable();
+
+        setOpaque(false);
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPane1.setOpaque(false);
+
+        tblUser.setForeground(java.awt.Color.white);
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "cod SIS", "Estudiante", "Materia", "Carrera", "Estado", "Nota"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblUser.setColumnSelectionAllowed(true);
+        tblUser.setEnabled(false);
+        tblUser.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(tblUser);
+        tblUser.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblUser.getColumnModel().getColumn(1).setResizable(false);
+        tblUser.getColumnModel().getColumn(2).setResizable(false);
+        tblUser.getColumnModel().getColumn(4).setResizable(false);
+        tblUser.getColumnModel().getColumn(5).setResizable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
 
 }
